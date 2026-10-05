@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import type { FormEvent } from 'react'
 import { supabase } from './lib/supabase'
 import { getAttributionSource, getExperimentVariant, markOnce, trackEvent } from './lib/analytics'
 
@@ -526,7 +527,7 @@ function DashboardPage() {
           <FunnelRow label="Referred registrations" value={data.referred} pct={data.landingViews ? (data.referred/data.landingViews)*100 : 0} />
           <div className="insight">
             {live
-              ? <>Start rate: <strong>{startRate.toFixed(1)}%</strong> · Start → completion: <strong>{completionRate.toFixed(1)}%</strong> · Shares: <strong>{data.shares}</strong></>
+              ? <>Start rate: <strong>{startRate.toFixed(1)}%</strong> · Start → completion: <strong>{completionRate.toFixed(1)}%</strong> · Shares: <strong>{liveData?.shares ?? 0}</strong></>
               : <>Simulation mode — real funnel tracking activates automatically when Supabase data is available.</>}
           </div>
         </div>
